@@ -1,0 +1,58 @@
+[
+    {
+        "id": "CVE-2023-5703",
+        "datePublished": "2023-11-07T12:15:13.770",
+        "dateLastModified": "2023-11-14T19:46:23.020",
+        "vulnerabilityStatus": "Analyzed",
+        "impactScore": "2.7",
+        "description": "The Gift Up Gift Cards for WordPress and WooCommerce plugin for WordPress is vulnerable to Stored Cross-Site Scripting via the plugin's 'giftup' shortcode in all versions up to, and including, 2.20.1 due to insufficient input sanitization and output escaping on user supplied attributes. This makes it possible for authenticated attackers with contributor-level and above permissions to inject arbitrary web scripts in pages that will execute whenever a user accesses an injected page."
+    },
+    {
+        "id": "CVE-2023-5709",
+        "datePublished": "2023-11-07T12:15:13.923",
+        "dateLastModified": "2023-11-14T19:46:15.667",
+        "vulnerabilityStatus": "Analyzed",
+        "impactScore": "3.6",
+        "description": "The WD WidgetTwitter plugin for WordPress is vulnerable to SQL Injection via the plugin's shortcode in versions up to, and including, 1.0.9 due to insufficient escaping on the user supplied parameter and lack of sufficient preparation on the existing SQL query. This makes it possible for authenticated attackers with contributor-level and above permissions to append additional SQL queries into already existing queries that can be used to extract sensitive information from the database."
+    },
+    {
+        "id": "CVE-2022-45350",
+        "datePublished": "2023-11-07T15:15:09.730",
+        "dateLastModified": "2023-11-15T13:10:15.490",
+        "vulnerabilityStatus": "Analyzed",
+        "impactScore": "5.9",
+        "description": "Improper Neutralization of Formula Elements in a CSV File vulnerability in Pär Thernström Simple History – user activity log, audit tool.This issue affects Simple History – user activity log, audit tool: from n/a through 3.3.1.\n\n"
+    },
+    {
+        "id": "CVE-2005-2371",
+        "datePublished": "2005-07-26T04:00:00.000",
+        "dateLastModified": "2018-10-19T15:32:46.487",
+        "vulnerabilityStatus": "Modified",
+        "impactScore": "2.9",
+        "description": "Directory traversal vulnerability in Oracle Reports 6.0, 6i, 9i, and 10g allows remote attackers to overwrite arbitrary files via (1) \"..\", (2) Windows drive letter (C:), and (3) absolute path sequences in the desname parameter.  NOTE: this issue was probably fixed by REP06 in CPU Jan 2006, in which case it overlaps CVE-2006-0289."
+    },
+    {
+        "id": "CVE-2005-2372",
+        "datePublished": "2005-07-26T04:00:00.000",
+        "dateLastModified": "2016-10-18T03:26:25.417",
+        "vulnerabilityStatus": "Modified",
+        "impactScore": "10",
+        "description": "Oracle Forms 4.5 through 10g starts form executables from arbitrary directories and executes them as the Oracle or System user, which allows attackers to execute arbitrary code by uploading a malicious .fmx file and referencing it using an absolute pathname argument in the (1) form or (2) module parameters to f90servlet."
+    },
+    {
+        "id": "CVE-2005-2373",
+        "datePublished": "2005-07-26T04:00:00.000",
+        "dateLastModified": "2016-10-18T03:26:26.887",
+        "vulnerabilityStatus": "Modified",
+        "impactScore": "10",
+        "description": "Buffer overflow in SlimFTPd 3.15 and 3.16 allows remote authenticated users to execute arbitrary code via a long directory name to (1) LIST, (2) DELE or (3) RNFR commands."
+    },
+    {
+        "id": "CVE-2017-0144",
+        "datePublished": "2017-03-17T00:59:04.010",
+        "dateLastModified": "2018-06-21T01:29:00.433",
+        "vulnerabilityStatus": "Modified",
+        "impactScore": "10",
+        "description": "The SMBv1 server in Microsoft Windows Vista SP2; Windows Server 2008 SP2 and R2 SP1; Windows 7 SP1; Windows 8.1; Windows Server 2012 Gold and R2; Windows RT 8.1; and Windows 10 Gold, 1511, and 1607; and Windows Server 2016 allows remote attackers to execute arbitrary code via crafted packets, aka \"Windows SMB Remote Code Execution Vulnerability.\" This vulnerability is different from those described in CVE-2017-0143, CVE-2017-0145, CVE-2017-0146, and CVE-2017-0148."
+    }
+  ]
