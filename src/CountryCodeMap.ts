@@ -4,7 +4,7 @@ type CountryCodeMap = {
 
 export function getCountryCode(country: string): string | undefined {
     const countryCodeMap: CountryCodeMap = {
-        "UK": "GB",
+        "United Kingdom": "UK",
         "India": "IN",
         "USA": "US",
         "Switzerland": "CH",
@@ -41,7 +41,7 @@ export function getCountryCode(country: string): string | undefined {
         "SouthAfrica": "ZA",
         "Chile": "CL",
         "Latvia": "LV",
-        "Nocountryaffiliation": "", 
+        "Nocountryaffiliation": "ZZ", //Correspond to a point at 0,0 in coordinates
     };
 
     return countryCodeMap[country];
