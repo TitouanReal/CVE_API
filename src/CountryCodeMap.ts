@@ -23,14 +23,14 @@ export function getCountryCode(country: string): string | undefined {
         "Austria": "AT",
         "France": "FR",
         "Ireland": "IE",
-        "SlovakRepublic": "SK",
+        "Slovak Republic": "SK",
         "Colombia": "CO",
-        "NewZealand": "NZ",
+        "New Zealand": "NZ",
         "Vietnam": "VN",
         "Brazil": "BR",
         "Singapore": "SG",
-        "SouthKorea": "KR",
-        "CzechRepublic": "CZ",
+        "South Korea": "KR",
+        "Czech Republic": "CZ",
         "Russia": "RU",
         "Finland": "FI",
         "Belgium": "BE",
@@ -38,10 +38,10 @@ export function getCountryCode(country: string): string | undefined {
         "Estonia": "EE",
         "Türkiye": "TR",
         "Denmark": "DK",
-        "SouthAfrica": "ZA",
+        "South Africa": "ZA",
         "Chile": "CL",
         "Latvia": "LV",
-        "Nocountryaffiliation": "ZZ", //Correspond to a point at 0,0 in coordinates
+        "No country affiliation": "ZZ", //Correspond to a point at 0,0 in coordinates
     };
 
     return countryCodeMap[country];
