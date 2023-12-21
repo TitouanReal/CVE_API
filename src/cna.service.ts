@@ -16,40 +16,48 @@ export class CnaService implements OnModuleInit {
         // await this.loadSomeCves(0, 10);
         // await this.loadAllCvesFromServer();
         await this.loadAllCnasFromServer();
-        this.addCna({
-            partner: "1E Limited",
-            scope: "All 1E products (including end-of-life/end-of-service products), as well as vulnerabilities in third-party software discovered by 1E that are not in another CNA's scope",
-            organizationType: "Vendor, Researcher",
-            country: "India"
+        /*this.addCna({
+            Partner: "1E Limited",
+            Scope: "All 1E products (including end-of-life/end-of-service products), as well as vulnerabilities in third-party software discovered by 1E that are not in another CNA's scope",
+            "Organization Type": "Vendor, Researcher",
+            Country: "India"
         });
         this.addCna({
-            partner: "AppCheck Ltd.",
-            scope: "Vulnerabilities discovered by AppCheck that are not within another CNA's scope",
-            organizationType: "Researcher",
-            country: "India"
-        });
+            Partner: "AppCheck Ltd.",
+            Scope: "Vulnerabilities discovered by AppCheck that are not within another CNA's scope",
+            "Organization Type": "Researcher",
+            Country: "India"
+        });*/
         console.log(`Storage contains ${this.storage.size} Cnas`);
     }
 
-    private async loadAllCnasFromServer(): Promise<void> {
+    private async loadAllCnasFromServer(): Promise<number> {
+        return firstValueFrom(
             this.httpService.get(`https://api.jsonbin.io/v3/b/65819713dc74654018852d51`).pipe(
                 map((response) => response.data),
                 tap((data: CnaReceivedDTO) => {
                     data.record.forEach((cna) =>
+                        console.log(cna['Organization Type']),
+                    );
+                }),
+                tap((data: CnaReceivedDTO) => {
+                    data.record.forEach((cna) =>
                         this.addCna({
-                            partner: cna.partner,
-                            scope: cna.scope,
-                            organizationType: cna.organizationType,
-                            country: cna.country
+                            Partner: cna.Partner,
+                            Scope: cna.Scope,
+                            "Organization Type": cna['Organization Type'],
+                            Country: cna.Country
                         }),
                     );
-                })
+                }),
+                map((data: CnaReceivedDTO) => 5),
             )
+        );
     }
 
     addCna(cna: CnaDTO) {
-        const cnaComplete = new Cna(cna.partner, cna.scope, cna.organizationType, cna.country);
-        this.storage.set(cna.partner, cnaComplete);
+        const cnaComplete = new Cna(cna.Partner, cna.Scope, cna["Organization Type"], cna.Country);
+        this.storage.set(cna.Partner, cnaComplete);
     }
 
     getCna(partner: string): Cna {
