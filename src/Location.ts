@@ -1,6 +1,6 @@
 import {CountryData, getCountryDetails} from './CountryData';
 
-class Location {
+export class Location {
     country: string;
     countryId: string;
     latitude: number;
