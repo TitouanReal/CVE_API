@@ -1,13 +1,13 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
-import { Cve } from './Cve';
+import { Cna } from './Cna';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom, map, tap } from 'rxjs';
-import { CveReceivedDTO } from './CveReceivedDTO';
+import { CnaDTO } from './CnaDTO';
 import { readFile } from 'fs/promises';
 
 @Injectable()
 export class CnaService implements OnModuleInit {
-    private readonly storage = new Map<string, Cve>();
+    private readonly storage = new Map<string, Cna>();
 
     constructor(private readonly httpService: HttpService) {}
 
