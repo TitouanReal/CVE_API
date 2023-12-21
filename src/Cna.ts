@@ -1,55 +1,41 @@
 import { IsString } from "class-validator";
-import { isStringObject } from "util/types";
+import { getCountryCode } from "./CountryCodeMap";
+import { Location } from "./Location";
 
 export class Cna {
     /**
-     * CVE identifier
+     * CNA name
      */
     @IsString()
     partner: string;
 
     /**
-     * Date of publication of the CVE
+     * Domains for exploits publishable by the CNA
      */
     @IsString()
     scope: string;
 
     /**
-     * Date of publication of the CVE
+     * Type of organisation of the CNA
      */
     @IsString()
     organizationType: string;
 
     /**
-     * Vulnerability status of the CVE
+     * Geographical informations about the CNA
      */
-    @IsString()
-    vulnerabilityStatus: string;
-
-    /**
-     * Impact score of the CVE
-     */
-    @IsString()
-    impactScore: string;
-
-    /**
-     * Description of the CVE
-     */
-    @IsString()
-    description: string;
+    location : Location;
 
     constructor(
-        id: string,
-        datePublished: string,
-        dateLastModified: string,
-        vulnerabilityStatus: string,
-        impactScore: string,
-        description: string) {
-        this.id = id;
-        this.datePublished = datePublished;
-        this.dateLastModified = dateLastModified;
-        this.vulnerabilityStatus = vulnerabilityStatus;
-        this.impactScore = impactScore;
-        this.description = description;
+        partner: string,
+        scope: string,
+        organizationType: string,
+        country : string) {
+        this.partner = partner;
+        this.scope = scope;
+        this.organizationType = organizationType;
+        const countryId=getCountryCode(country);
+        const location = new Location(countryId);
+        this.location = location;
     }
 }

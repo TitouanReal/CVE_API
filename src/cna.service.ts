@@ -6,7 +6,7 @@ import { CveReceivedDTO } from './CveReceivedDTO';
 import { readFile } from 'fs/promises';
 
 @Injectable()
-export class CveService implements OnModuleInit {
+export class CnaService implements OnModuleInit {
     private readonly storage = new Map<string, Cve>();
 
     constructor(private readonly httpService: HttpService) {}

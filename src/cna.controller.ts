@@ -3,30 +3,30 @@ import {
     Get,
     Param,
 } from '@nestjs/common';
-import { CveService } from './cve.service';
-import { Cve } from './Cve';
+import { CnaService } from './cna.service';
+import { Cna } from './Cna';
 
 @Controller('cves')
-export class CveController {
-    constructor(private readonly cveService: CveService) {}
+export class CnaController {
+    constructor(private readonly cnaService: CnaService) {}
 
     @Get()
-    getAllCves(): Array<Cve> {
-        return this.cveService.getAllCves();
+    getAllCves(): Array<Cna> {
+        return this.cnaService.getAllCves();
     }
 
     @Get()
     getNumberOfCves(): number {
-        return this.cveService.getTotalNumberOfCves();
+        return this.cnaService.getTotalNumberOfCves();
     }
 
     @Get(':number')
-    getCvesBetween(@Param('id') id: string): Array<Cve> {
-        return this.cveService.getAllCves();
+    getCvesBetween(@Param('id') id: string): Array<Cna> {
+        return this.cnaService.getAllCves();
     }
 
     @Get(':id')
-    getCve(@Param('id') id: string): Cve {
-        return this.cveService.getCve(id);
+    getCve(@Param('id') id: string): Cna {
+        return this.cnaService.getCve(id);
     }
 }
