@@ -16,7 +16,7 @@ export class CnaService implements OnModuleInit {
         // await this.loadSomeCves(0, 10);
         // await this.loadAllCvesFromServer();
         await this.loadAllCnasFromServer();
-        console.log(`Storage contains ${this.storage.size} CVEs`);
+        console.log(`Storage contains ${this.storage.size} Cnas`);
     }
 
     private async loadAllCnasFromServer(): Promise<void> {
