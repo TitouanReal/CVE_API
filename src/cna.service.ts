@@ -4,6 +4,7 @@ import { HttpService } from '@nestjs/axios';
 import { firstValueFrom, map, tap } from 'rxjs';
 import { CnaDTO } from './CnaDTO';
 import { readFile } from 'fs/promises';
+import { CnaReceivedDTO } from './CnaReceivedDTO';
 
 @Injectable()
 export class CnaService implements OnModuleInit {
@@ -14,73 +15,50 @@ export class CnaService implements OnModuleInit {
     async onModuleInit() {
         // await this.loadSomeCves(0, 10);
         // await this.loadAllCvesFromServer();
-        await this.loadBooksFromFile();
+        await this.loadAllCnasFromServer();
         console.log(`Storage contains ${this.storage.size} CVEs`);
     }
 
-    private async loadBooksFromFile() {
-        const data = await readFile('src/dataset.json');
-        const cves: Array<Cve> = JSON.parse(data.toString());
-        cves.forEach((cve) => this.addCve(cve));
-    }
-
-    private async loadAllCvesFromServer(): Promise<void> {
-        let noCves = 0;
-        while (true) {
-            let results = await this.loadSomeCves(noCves, 2000);
-            noCves += results;
-            console.log(noCves);
-            await new Promise(f => setTimeout(f, 5000));
-            if (results < 2000) {
-                break;
-            }
-        }
-    }
-
-    private async loadSomeCves(start: number, results: number): Promise<number> {
-        return firstValueFrom(
-            this.httpService.get(`https://services.nvd.nist.gov/rest/json/cves/2.0/?resultsPerPage=${results}&startIndex=${start}`).pipe(
+    private async loadAllCnasFromServer(): Promise<void> {
+            this.httpService.get(`https://api.jsonbin.io/v3/b/65819713dc74654018852d51`).pipe(
                 map((response) => response.data),
-                tap((data: CveReceivedDTO) => {
-                    data.vulnerabilities.forEach((cveContainer) =>
-                        this.addCve({
-                            id: cveContainer.cve.id,
-                            datePublished: cveContainer.cve.published,
-                            dateLastModified: cveContainer.cve.lastModified,
-                            vulnerabilityStatus: cveContainer.cve.vulnStatus,
-                            impactScore: cveContainer.cve.metrics.cvssMetricV2[0].impactScore,
-                            description: cveContainer.cve.descriptions[0].value
+                tap((data: CnaReceivedDTO) => {
+                    data.record.forEach((cna) =>
+                        this.addCna({
+                            partner: cna.partner,
+                            scope: cna.scope,
+                            organizationType: cna.organizationType,
+                            country: cna.country
                         }),
                     );
-                }),
-                map((data: CveReceivedDTO) => data.resultsPerPage),
-            ),
-        );
+                })
+            )
     }
 
-    addCve(cve: Cve) {
-        this.storage.set(cve.id, cve);
+    addCna(cna: CnaDTO) {
+        const cnaComplete = new Cna(cna.partner, cna.scope, cna.organizationType, cna.country);
+        this.storage.set(cna.partner, cnaComplete);
     }
 
-    getCve(id: string): Cve {
-        const cve = this.storage.get(id);
-        if (!cve) {
-            throw new Error(`CVE with id ${id} not found`);
+    getCna(partner: string): Cna {
+        const cna = this.storage.get(partner);
+        if (!cna) {
+            throw new Error(`CNA ${partner} not found`);
         }
-        return cve;
+        return cna;
     }
 
-    getAllCves(): Array<Cve> {
+    getAllCnas(): Array<Cna> {
         return Array.from(this.storage.values());
     }
 
-    getTotalNumberOfCves(): number {
+    getTotalNumberOfCnas(): number {
         return this.storage.size;
     }
 
-    getCvesPublishedAfter(dateAsString: string): Array<Cve> {
-        const date = new Date(dateAsString);
-        return this.getAllCves()
-            .filter((cve) => new Date(cve.datePublished) > date)
-    }
+    //getCvesPublishedAfter(dateAsString: string): Array<Cve> {
+    //    const date = new Date(dateAsString);
+    //    return this.getAllCves()
+    //        .filter((cve) => new Date(cve.datePublished) > date)
+    //}
 }
