@@ -16,6 +16,18 @@ export class CnaService implements OnModuleInit {
         // await this.loadSomeCves(0, 10);
         // await this.loadAllCvesFromServer();
         await this.loadAllCnasFromServer();
+        this.addCna({
+            partner: "1E Limited",
+            scope: "All 1E products (including end-of-life/end-of-service products), as well as vulnerabilities in third-party software discovered by 1E that are not in another CNA's scope",
+            organizationType: "Vendor, Researcher",
+            country: "India"
+        });
+        this.addCna({
+            partner: "AppCheck Ltd.",
+            scope: "Vulnerabilities discovered by AppCheck that are not within another CNA's scope",
+            organizationType: "Researcher",
+            country: "India"
+        });
         console.log(`Storage contains ${this.storage.size} Cnas`);
     }
 

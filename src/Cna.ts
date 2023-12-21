@@ -34,8 +34,11 @@ export class Cna {
         this.partner = partner;
         this.scope = scope;
         this.organizationType = organizationType;
+        console.log(`Country: ${country}`)
         const countryId=getCountryCode(country);
+        console.log(`Country ID : ${countryId}`)
         const location = new Location(countryId);
+        console.log(`location : ${location}`)
         this.location = location;
     }
 }
